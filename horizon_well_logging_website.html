@@ -4,20 +4,54 @@
     <head>
         <title>Horizon Well Logging Inc. Description Translator</title>
         <style>
-            body { font-family: Arial; background-color: #f0f0f0; }
-            h1 { color: #333; text-align: center; }
-            p { font-size: 18px; text-align: center; color: #666; }
-            button { background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+            body { font-family: Arial; background-color: white; color: black; text-align: center; }
+            h1 { color: black; }
+            p { font-size: 18px; color: black; }
+            button { background-color: darkblue; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+            img { width: 150px; height: auto; margin-top: 20px; }
+            input { padding: 10px; width: 300px; margin-top: 20px; }
         </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     </head>
     <body>
-        <h1>Welcome to Horizon Well Logging Inc. Description Translator!</h1>
+        <img src="C:/Users/Berenise/Documents/HorizonWells_TranslatingCode/Horizon_Logo.jpg" alt="Horizon Well Logging Inc. Logo">
+        <h1>Welcome, Meet Riggy, Your Description Translator!</h1>
         <p>This tool helps translate complex descriptions for better understanding.</p>
-        <button onclick="displayMessage()">Click Me!</button>
+
+        <input type="text" id="userInput" placeholder="Enter your description here">
+        <button onclick="translateDescription()">Submit</button>
+
         <div id="message"></div>
+        <input type="file" id="fileInput" accept=".xlsx" onchange="readExcel(event)">
+
         <script>
-            function displayMessage() {
-                document.getElementById("message").innerHTML = "Thank you for using Horizon Well Logging Inc. Description Translator!";
+            let translations = {};
+
+            function readExcel(event) {
+                const file = event.target.files[0];
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, { type: 'array' });
+                    const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+                    const jsonData = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
+
+                    // Populate translations object
+                    jsonData.forEach(row => {
+                        if (row[0] && row[1]) {
+                            translations[row[0].toLowerCase()] = row[1];
+                        }
+                    });
+                    alert("Translation data loaded successfully!");
+                };
+                reader.readAsArrayBuffer(file);
+            }
+
+            function translateDescription() {
+                const userInput = document.getElementById("userInput").value;
+                const words = userInput.split(' ');
+                const translatedWords = words.map(word => translations[word.toLowerCase()] || word);
+                document.getElementById("message").innerHTML = "Translated: " + translatedWords.join(' ');
             }
         </script>
     </body>
