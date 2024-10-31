@@ -29,3 +29,6 @@ Enter a full term in the input box.
 Click the "Translate" button to view the abbreviation for the entered term.
 The application will fetch data from the FullWords_T_Abbreviations.xlsx Excel sheet to perform the translation.
 
+##Having issues?
+-If you're experiencing issues and/or have suggestions on how to improve this feel free to reach out!
+-brangel@horizonwells.com
