@@ -16,7 +16,7 @@ Welcome to the **Horizon Well Logging Inc. Description Translator**! This web ap
 
 ##How to Use
 1. Navigate into the project repository: Horizon-Well-Logging-Description-Translator.
-2. Dowload the FullWords_T_Abbreviations excel sheet.
+2. Dowload the FullWords_T_Abbreviations excel sheet (hit the three dots icon on the right, then download).
 3. Open the translator website: https://bereniserangel.github.io/Horizon-Well-Logging-Description-Translator/horizon_well_logging_website.html
 4. Upload the excel file.
 5. Ready to type in your full description in the box, and get your abbreviated format back!
